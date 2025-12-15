@@ -24,9 +24,15 @@ btn_fechar_modal.addEventListener("click", () => {
 formulario.addEventListener("submit", (event) => {
   event.preventDefault()
 
-  //resolver questão do ID
+  //Calcula o ID da receita
+  const lista_receitas = JSON.parse(localStorage.getItem("receitas")) || [...receitas]
+  let id_proximo
+
+  if(lista_receitas !== null) {
+    id_proximo = lista_receitas.length + 1
+  }
   const receita = {
-    id: Date.now(),
+    id: id_proximo,
     titulo: document.querySelector("#titulo_receita").value.trim(),
     categoria: document.querySelector("#categoria_receita").value,
     data: document.querySelector("#data_receita").value,
@@ -34,8 +40,11 @@ formulario.addEventListener("submit", (event) => {
   }
   
   //adiciona receita
-  receitas.push(receita)
-  salvarReceitas(receitas)
+  lista_receitas.push(receita)
+  salvarReceitas(lista_receitas)
+  //reseta o formulario
+  formulario.reset()
+
   //fechar modal
   modal.classList.remove("ativo")
   document.body.classList.remove("modal_aberto")
@@ -47,4 +56,6 @@ function salvarReceitas (receitas) {
       localStorage.setItem("receitas",JSON.stringify(receitas))
   }
 }
+
+//renderiza as receitas como cards no HTML
 
