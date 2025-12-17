@@ -242,21 +242,6 @@ header {
   margin-bottom: 1.5rem;
 }
 
-.classificador {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #eee;
-  cursor: pointer;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-
-.classificador:hover {
-  background-color: #0077cc;
-  color: #fff;
-}
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -283,6 +268,13 @@ header {
   margin: 0.2rem 0;
   font-size: 0.9rem;
   color: #555;
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 10px;
 }
 
 .card_receita button {

@@ -34,8 +34,13 @@
     
     <section class="receitas">
       <div class="classificadores">
-        <button class="classificador">Ganho de Massa</button>
-        <button class="classificador">Perda de Gordura</button>
+        <select name="" id="classficador">
+          <optgroup label="Categoria">
+            <option value="Perda de Gordura">Perda de Gordura</option>
+            <option value="Ganho de Massa">Ganho de Massa</option>
+            <option value="Manutenção">Manutenção</option>
+          </optgroup>
+        </select>
       </div>
 
       <div class="cards" id="cards_receitas">
@@ -101,7 +106,7 @@
   <div class="modal_adicionar_receita">
     <div class="modal_conteudo">
 
-      <h2>Adicionar Receita</h2>
+      <h2 id="titulo_adicionar_receita">Adicionar Receita</h2>
 
       <form id="formulario_receita">
         <div class="campo_formulario">
