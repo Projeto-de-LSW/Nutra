@@ -167,7 +167,40 @@ function renderizar_receitas() {
   lista_receitas.forEach(receita => {
     container_de_cards.appendChild(cria_card(receita))
   });
+
+  //atualiza o ranking sempre que renderiza a lista de cards
+  render_ranking()
 }
+
+//renderiza o ranking das receitas mais curtidas
+function render_ranking() {
+  const rankingList = document.getElementById("ranking_list")
+  if(!rankingList) return
+
+  const lista_receitas = JSON.parse(localStorage.getItem("receitas")) || []
+  const top = lista_receitas.slice().sort((a,b) => b.curtidas - a.curtidas).slice(0,5)
+
+  if(top.length === 0) {
+    rankingList.innerHTML = '<li>Nenhuma receita ainda</li>'
+    return
+  }
+
+  rankingList.innerHTML = top.map(r => `<li data-id="${r.id}"><span class="titulo">${r.titulo}</span><span class="badge">${r.curtidas}</span></li>`).join('')
+}
+
+//clicar no ranking leva para o card
+document.addEventListener("click", (e) => {
+  const li = e.target.closest("#ranking_list li")
+  if(!li) return
+
+  const id = Number(li.dataset.id)
+  const card = document.querySelector(`.card_receita[data-id="${id}"]`)
+  if(card) {
+    card.scrollIntoView({behavior: "smooth", block: "center"})
+    card.classList.add("highlight")
+    setTimeout(() => card.classList.remove("highlight"), 2000)
+  }
+})
 //exclui uma receita no localStorage e renderiza
 function excluir_receita(id) {
   const receitas = JSON.parse(localStorage.getItem("receitas"))
