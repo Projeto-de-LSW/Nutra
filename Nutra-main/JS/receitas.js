@@ -9,9 +9,19 @@ const titulo_editando = document.querySelector("#titulo_adicionar_receita")
 const titulo_receita = document.querySelector("#titulo_receita")
 const categoria_receita = document.querySelector("#categoria_receita")
 const data_receita = document.querySelector("#data_receita")
+const classificador = document.getElementById("classficador")
 
 //variaveis globais
 let id_editando = null
+let filtroCategoria = 'all'
+
+//quando o select de categoria muda, atualiza o filtro e re-renderiza
+if(classificador) {
+  classificador.addEventListener('change', (e) => {
+    filtroCategoria = e.target.value
+    renderizar_receitas()
+  })
+}
 
 //Aqui ele abre o modal quando clica
 btn_adicionar_receita.addEventListener("click", () => {
@@ -164,20 +174,23 @@ function renderizar_receitas() {
 
   const lista_receitas = JSON.parse(localStorage.getItem("receitas")) || []
 
-  lista_receitas.forEach(receita => {
+  //aplica filtro de categoria (se 'all', mostra todas)
+  const filtradas = (filtroCategoria && filtroCategoria !== 'all') ? lista_receitas.filter(r => r.categoria === filtroCategoria) : lista_receitas
+
+  filtradas.forEach(receita => {
     container_de_cards.appendChild(cria_card(receita))
   });
 
-  //atualiza o ranking sempre que renderiza a lista de cards
-  render_ranking()
-}
+  //atualiza o ranking sempre que renderiza a lista de cards, usando somente as filtradas
+  render_ranking(filtradas)
+} 
 
 //renderiza o ranking das receitas mais curtidas
-function render_ranking() {
+function render_ranking(receitasParaRanking) {
   const rankingList = document.getElementById("ranking_list")
   if(!rankingList) return
 
-  const lista_receitas = JSON.parse(localStorage.getItem("receitas")) || []
+  const lista_receitas = receitasParaRanking || JSON.parse(localStorage.getItem("receitas")) || []
   const top = lista_receitas.slice().sort((a,b) => b.curtidas - a.curtidas).slice(0,5)
 
   if(top.length === 0) {
