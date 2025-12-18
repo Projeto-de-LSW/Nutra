@@ -242,11 +242,61 @@ header {
   margin-bottom: 1.5rem;
 }
 
+.ranking {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e6eef6;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,119,204,0.04);
+}
+
+.ranking h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #0077cc;
+}
+
+.ranking ol {
+  list-style: decimal inside;
+  padding-left: 12px;
+}
+
+.ranking li {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 8px 0;
+  border-bottom:1px solid #f1f6fb;
+}
+
+.ranking li:last-child {
+  border-bottom:none;
+}
+
+.ranking .badge {
+  background:#0077cc;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:0.9rem;
+}
+
+.ranking li:hover {
+  background:#f8fbff;
+  cursor:pointer;
+}
+
+.card_receita.highlight {
+  box-shadow: 0 0 0 3px rgba(255,193,7,0.25);
+  transform: none;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
-}
+} 
 
 .card_receita {
   background-color: #f5f5f5;
