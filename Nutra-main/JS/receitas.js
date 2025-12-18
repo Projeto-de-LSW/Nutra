@@ -9,9 +9,14 @@ const titulo_editando = document.querySelector("#titulo_adicionar_receita")
 const titulo_receita = document.querySelector("#titulo_receita")
 const categoria_receita = document.querySelector("#categoria_receita")
 const data_receita = document.querySelector("#data_receita")
+const filtro_de_categoria = document.querySelector("#filtro_categoria")
+const filtro_de_pesquisa = document.querySelector("#pesquisa")
+const container_de_ordenacao = document.querySelector(".ordenacao")
+const botoes_de_ordenacao = document.querySelectorAll(".ordenacao button")
 
 //variaveis globais
 let id_editando = null
+let ordem_atual = null
 
 //Aqui ele abre o modal quando clica
 btn_adicionar_receita.addEventListener("click", () => {
@@ -38,8 +43,8 @@ formulario.addEventListener("submit", (event) => {
   event.preventDefault()
 
   //validação dos dados
-  if(validar_receita(titulo_receita.value, data_receita.value)){
-    alert("Coloque datas maior ou igual a de hoje ou titulos menores!")
+  if(validar_receita(titulo_receita.value, data_receita.value, categoria_receita.value)){
+    alert("Coloque uma data maior ou igual a de hoje, titulos menores e escolha uma categoria!")
     return
   }
   //pega a lista de receitas do localStorage
@@ -78,6 +83,11 @@ formulario.addEventListener("submit", (event) => {
     
     //adiciona receita
     lista_receitas.push(receita)
+    if (id_editando == null) {
+      setTimeout(() => {
+        alert("Receita Cadastrada com Sucesso!")
+      }, 0);
+    }
   }
   salvarReceitas(lista_receitas)
 
@@ -115,6 +125,34 @@ container_de_cards.addEventListener("click", (event) => {
   }
 });
 
+filtro_de_categoria.addEventListener("change", () => {
+  renderizar_receitas()
+})
+
+filtro_de_pesquisa.addEventListener("input", () => {
+  renderizar_receitas()
+})
+
+container_de_ordenacao.addEventListener("click", (event) => {
+  const botao = event.target
+  if (botao.tagName !== "BUTTON") return
+
+  //aqui é só se o cara clicar de novo ele parar de ser ativo a ordenação
+  if (botao.classList.contains("ativo")) {
+    botao.classList.remove("ativo")
+    ordem_atual = null
+    renderizar_receitas()
+    return
+  }
+
+  //tiro de todos o ativo de adiciona somente no botão clicado
+  botoes_de_ordenacao.forEach(botao => botao.classList.remove("ativo"))
+  botao.classList.add("ativo")
+  ordem_atual = botao.dataset.ordem
+
+  renderizar_receitas()
+})
+
 //salvar receita no localStorage
 function salvarReceitas (receitas) {
   if(receitas !== null) {
@@ -128,9 +166,13 @@ function salvarCurtidas (curtidas) {
   }
 }
 //valida a receita
-function validar_receita (titulo, valor_data) {
+function validar_receita (titulo, valor_data,categoria) {
   //true significa erro e false passou
   if(titulo.length >= 100) {
+    return true
+  }
+
+  if(!categoria) {
     return true
   }
 
@@ -162,7 +204,40 @@ function cria_card(receita) {
 function renderizar_receitas() {
   container_de_cards.innerHTML = ""
 
-  const lista_receitas = JSON.parse(localStorage.getItem("receitas")) || []
+  let lista_receitas = JSON.parse(localStorage.getItem("receitas")) || []
+  const categoria_selecionada = filtro_de_categoria.value
+  const conteudo_do_filtro_de_pesquisa = filtro_de_pesquisa.value.toLowerCase()
+
+  //Esse daqui é o filtro por categoria
+  if (categoria_selecionada !== "") {
+    lista_receitas = lista_receitas.filter(
+      receita => receita.categoria === categoria_selecionada
+    )
+  }
+  //Esse daqui é o filtro de pesquisa
+  if (conteudo_do_filtro_de_pesquisa !== "") {
+    lista_receitas = lista_receitas.filter(
+      receita => receita.titulo.toLowerCase().includes(conteudo_do_filtro_de_pesquisa)
+    )
+  }
+
+  //Esse daqui é o filtro por ranking
+  if (ordem_atual === "nome") {
+    lista_receitas.sort((a, b) =>
+      a.titulo.localeCompare(b.titulo)
+    )
+  }
+
+  if (ordem_atual === "data") {
+    lista_receitas.sort((a, b) =>
+      new Date(a.data) - new Date(b.data)
+    )
+  }
+
+  if (ordem_atual === "curtidas") {
+    lista_receitas.sort((a, b) => b.curtidas - a.curtidas)
+  }
+
 
   lista_receitas.forEach(receita => {
     container_de_cards.appendChild(cria_card(receita))
@@ -178,6 +253,7 @@ function excluir_receita(id) {
   salvarCurtidas(curtidas_menos_uma)
   salvarReceitas(receitas_menos_uma)
   renderizar_receitas()
+  alert("Receita Excluida meu pratrão!")
 }
 //curti uma receita no localStorage e cria as curtidas e renderiza
 function curtir_receita(id) {
@@ -191,7 +267,7 @@ function curtir_receita(id) {
     const receita = receitas.find(receita => receita.id === id)
     //verificar se receita existe
     if(receita) {
-      receita.curtidas = ++receita.curtidas
+      receita.curtidas++
     }
   }
 

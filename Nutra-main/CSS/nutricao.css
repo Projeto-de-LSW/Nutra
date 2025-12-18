@@ -236,10 +236,68 @@ header {
   font-family: Arial, sans-serif;
 }
 
-.classificadores {
+.pesquisa_e_filtros {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 14px;
+  background: #f8f9fb;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.pesquisa_e_filtros input, .pesquisa_e_filtros select {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.pesquisa_e_filtros input:focus, .pesquisa_e_filtros select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.pesquisa_e_filtros input::placeholder {
+  color: #999;
+}
+
+.pesquisa_e_filtros select:hover {
+  cursor: pointer;
+}
+
+.ordenacao {
+  display: flex;
+  gap: 10px;
+}
+
+.ordenacao button {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ordenacao button:hover {
+  background-color: #f0f0f0;
+}
+
+.ordenacao button.ativo {
+  background-color: #4f46e5;
+  color: #fff;
+  border-color: #4f46e5;
 }
 
 .cards {
@@ -503,5 +561,21 @@ footer p {
 
   #btn-abrir-modal {
     transform: scale(90%);
+  }
+
+  .pesquisa_e_filtros {
+    flex-direction: column;
+  }
+
+  .pesquisa_e_filtros input, .pesquisa_e_filtros select {
+    width: 100%;
+  }
+
+  .ordenacao {
+    flex-wrap: wrap;
+  }
+
+  .ordenacao button {
+    flex: 1;
   }
 }

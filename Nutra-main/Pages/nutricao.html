@@ -33,14 +33,21 @@
     </div>
     
     <section class="receitas">
-      <div class="classificadores">
-        <select name="" id="classficador">
-          <optgroup label="Categoria">
-            <option value="Perda de Gordura">Perda de Gordura</option>
-            <option value="Ganho de Massa">Ganho de Massa</option>
-            <option value="Manutenção">Manutenção</option>
-          </optgroup>
+      <div class="pesquisa_e_filtros">
+        <select id="filtro_categoria">
+          <option value="">Todas as categorias</option>
+          <option value="Perda de Gordura">Perda de Gordura</option>
+          <option value="Ganho de Massa">Ganho de Massa</option>
+          <option value="Manutenção">Manutenção</option>
         </select>
+
+        <input type="text" id="pesquisa" placeholder="Pesquisar receita...">
+
+        <div class="ordenacao">
+          <button data-ordem="nome">Nome</button>
+          <button data-ordem="data">Data</button>
+          <button data-ordem="curtidas">Curtidas</button>
+        </div>
       </div>
 
       <div class="cards" id="cards_receitas">
@@ -111,12 +118,12 @@
       <form id="formulario_receita">
         <div class="campo_formulario">
           <label for="titulo_receita">Título</label>
-          <input type="text" id="titulo_receita" name="titulo" placeholder="Ex: Frango com sla" required>
+          <input type="text" id="titulo_receita" name="titulo" placeholder="Ex: Frango com sla" >
         </div>
 
         <div class="campo_formulario">
           <label for="categoria_receita">Categoria</label>
-          <select id="categoria_receita" name="categoria" required>
+          <select id="categoria_receita" name="categoria" >
             <option value="">Selecione</option>
             <option value="Perda de Gordura">Perda de Gordura</option>
             <option value="Ganho de Massa">Ganho de Massa</option>
@@ -126,7 +133,7 @@
 
         <div class="campo_formulario">
           <label for="data_receita">Data</label>
-          <input type="date" id="data_receita" name="data" required>
+          <input type="date" id="data_receita" name="data" >
         </div>
 
         <div class="acoes_modal">
