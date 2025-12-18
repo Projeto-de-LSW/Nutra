@@ -8,7 +8,7 @@ O **Nutra** é um site focado em **nutrição e treinos**, desenvolvido como pro
 
 Você pode acessar o site diretamente pelo GitHub Pages no link abaixo:
 
-🔗 **https://projeto-de-lsw.github.io/Nutra/Nutra-main/Pages/nutricao.html**
+🔗 **https://projeto-de-lsw.github.io/Nutra/Nutra-main/index.html**
 
 ---
 
