@@ -252,7 +252,7 @@ function excluir_receita(id) {
   salvarCurtidas(curtidas_menos_uma)
   salvarReceitas(receitas_menos_uma)
   renderizar_receitas()
-  alert("Receita Excluida meu pratrão!")
+  alert("Receita Excluida!")
 }
 //curti uma receita no localStorage e cria as curtidas e renderiza
 function curtir_receita(id) {
