@@ -74,38 +74,67 @@ header {
 .adicionar_receita {
   display: flex;
   justify-content: center;
-  margin: 32px 0;
+  margin: 36px 0;
 }
 
 #btn_adicionar_receita {
   display: flex;
   align-items: center;
+  gap: 12px;
   justify-content: center;
-  width: 260px;
-  height: 140px;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 12px;
+  width: 320px;
+  height: 120px;
+  background: linear-gradient(90deg, #ffffff 60%, #f0fbf7 100%);
+  border: 1px solid #e6f1ec;
+  border-radius: 14px;
   cursor: pointer;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 18px rgba(60,165,125,0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s;
+  padding: 14px 18px;
 }
 
-#btn_adicionar_receita p {
+#btn_adicionar_receita .plus {
+  width: 50px;
+  height: 50px;
+  background: #3ca57d;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+#btn_adicionar_receita .btn-text p {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #222;
+  font-size: 16px;
+  font-weight: 700;
+  color: #044a2f;
+}
+
+#btn_adicionar_receita .btn-text small {
+  display: block;
+  color: #6b8b7b;
+  font-size: 12px;
+  margin-top: 4px;
 }
 
 #btn_adicionar_receita:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(60,165,125,0.14);
 }
 
 #btn_adicionar_receita:active {
-  transform: scale(0.97);
+  transform: translateY(-2px) scale(0.99);
 }
+
+@media screen and (max-width: 610px) {
+  #btn_adicionar_receita {
+    width: 90%;
+    height: 110px;
+  }
+} 
 
 .modal_adicionar_receita {
   position: fixed;
@@ -244,52 +273,82 @@ header {
 
 .ranking {
   background: #fff;
-  padding: 16px;
+  padding: 18px;
   border-radius: 12px;
   border: 1px solid #e6eef6;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 6px rgba(0,119,204,0.04);
+  box-shadow: 0 6px 20px rgba(0,119,204,0.06);
 }
 
 .ranking h3 {
-  margin: 0 0 8px;
-  font-size: 1rem;
-  color: #0077cc;
-}
-
-.ranking ol {
-  list-style: decimal inside;
-  padding-left: 12px;
-}
-
-.ranking li {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  color: #004b7a;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  padding: 8px 0;
-  border-bottom:1px solid #f1f6fb;
+  gap:8px;
 }
 
-.ranking li:last-child {
-  border-bottom:none;
+#ranking_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: rank;
 }
 
-.ranking .badge {
-  background:#0077cc;
-  color:#fff;
-  padding:4px 8px;
-  border-radius:999px;
-  font-size:0.9rem;
+#ranking_list li {
+  counter-increment: rank;
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f6fb;
 }
 
-.ranking li:hover {
-  background:#f8fbff;
-  cursor:pointer;
+#ranking_list li::before {
+  content: counter(rank);
+  display:inline-flex;
+  width: 30px;
+  height: 30px;
+  background: #f0f7fb;
+  color: #0077cc;
+  border-radius: 6px;
+  text-align: center;
+  line-height:30px;
+  font-weight:700;
+  margin-right: 6px;
+}
+
+#ranking_list .titulo {
+  flex: 1;
+  font-weight: 600;
+  color: #333;
+}
+
+#ranking_list .badge {
+  background: #0077cc;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+#ranking_list li:hover {
+  background: #f8fbff;
+  cursor: pointer;
+  transform: translateX(3px);
+  transition: transform 0.15s;
 }
 
 .card_receita.highlight {
   box-shadow: 0 0 0 3px rgba(255,193,7,0.25);
   transform: none;
+}
+
+@media screen and (max-width: 610px) {
+  #ranking_list li {
+    padding: 8px 0;
+  }
 }
 
 .cards {
