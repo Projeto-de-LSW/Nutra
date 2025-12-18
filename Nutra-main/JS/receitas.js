@@ -238,7 +238,6 @@ function renderizar_receitas() {
     lista_receitas.sort((a, b) => b.curtidas - a.curtidas)
   }
 
-
   lista_receitas.forEach(receita => {
     container_de_cards.appendChild(cria_card(receita))
   });
