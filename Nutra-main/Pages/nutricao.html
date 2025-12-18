@@ -7,20 +7,16 @@
   <link rel="stylesheet" href="../CSS/nutricao.css">
 </head>
 <body>
-
   <header>
     <div class="container">
       <div class="logo">🍃 Nutra</div>
-      <nav class="menu">
+      <nav>
         <ul class="menu">
           <li><a href="../index.html">Início</a></li>
           <li><a href="nutricao.html" class="active" aria-current="page">Receitas</a></li>
           <li><a href="treinos.html">Treinos</a></li>
         </ul>
       </nav>
-      <div class="user">
-        <input type="text" placeholder="🔍" class="search" />
-      </div>
     </div>
   </header>
 
@@ -29,29 +25,33 @@
       <h1>Receitas e Calculadora de IMC</h1>
       <p>Encontre a inspiração e as ferramentas para sua jornada de saúde.</p>
     </section>
-
+    
+    <div class="adicionar_receita">
+      <button id="btn_adicionar_receita">
+        <p>Criar Receita</p>
+      </button>
+    </div>
+    
     <section class="receitas">
-      <div class="tabs">
-        <button class="active">Ganho de Massa Muscular</button>
-        <button>Perda de Gordura</button>
+      <div class="pesquisa_e_filtros">
+        <select id="filtro_categoria">
+          <option value="">Todas as categorias</option>
+          <option value="Perda de Gordura">Perda de Gordura</option>
+          <option value="Ganho de Massa">Ganho de Massa</option>
+          <option value="Manutenção">Manutenção</option>
+        </select>
+
+        <input type="text" id="pesquisa" placeholder="Pesquisar receita...">
+
+        <div class="ordenacao">
+          <button data-ordem="nome">Nome</button>
+          <button data-ordem="data">Data</button>
+          <button data-ordem="curtidas">Curtidas</button>
+        </div>
       </div>
-      <div class="cards">
-        <div class="card">
-          <img src="../Images/frangocombatatadoce.jpg" alt="Frango com Batata Doce" />
-          <h3>Frango com Batata Doce</h3>
-        </div>
-        <div class="card">
-          <img src="../Images/Salmãocomquinoa.jpg" alt="Salmão com Quinoa" />
-          <h3>Salmão com Quinoa</h3>
-        </div>
-        <div class="card">
-          <img src="../Images/Omeleteproteico.jpg" alt="Omelete Proteico" />
-          <h3>Omelete Proteico</h3>
-        </div>
-        <div class="card">
-          <img src="../Images/Shakedeproteína.jpg" alt="Shake de Proteína" />
-          <h3>Shake de Proteína</h3>
-        </div>
+
+      <div class="cards" id="cards_receitas">
+        <!--Adiciona aqui os cards!!!-->
       </div>
     </section>
 
@@ -109,6 +109,41 @@
       </form>
     </section>
   </main>
+
+  <div class="modal_adicionar_receita">
+    <div class="modal_conteudo">
+
+      <h2 id="titulo_adicionar_receita">Adicionar Receita</h2>
+
+      <form id="formulario_receita">
+        <div class="campo_formulario">
+          <label for="titulo_receita">Título</label>
+          <input type="text" id="titulo_receita" name="titulo" placeholder="Ex: Frango com sla" >
+        </div>
+
+        <div class="campo_formulario">
+          <label for="categoria_receita">Categoria</label>
+          <select id="categoria_receita" name="categoria" >
+            <option value="">Selecione</option>
+            <option value="Perda de Gordura">Perda de Gordura</option>
+            <option value="Ganho de Massa">Ganho de Massa</option>
+            <option value="Manutenção">Manutenção</option>
+          </select>
+        </div>
+
+        <div class="campo_formulario">
+          <label for="data_receita">Data</label>
+          <input type="date" id="data_receita" name="data" >
+        </div>
+
+        <div class="acoes_modal">
+          <button type="submit" class="botao_salvar">Salvar Receita</button>
+          <button type="button" id="fechar_modal" class="botao_cancelar">Cancelar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
   
   <footer>
     <div class="footer-links">
@@ -119,5 +154,6 @@
     <p>&copy; 2025 Nutra. Todos os direitos reservados.</p>
   </footer>
   <script src="../JS/calculo.js"></script>
+  <script src="../JS/receitas.js"></script>
 </body>
 </html>

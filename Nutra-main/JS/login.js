@@ -1,7 +1,7 @@
 const criarCONTA = document.getElementById('criar');
 
 criarCONTA.addEventListener('click', function() {
-    window.location.href = '/Pages/cadastro.html';
+    window.location.href = '../Pages/cadastro.html';
 });
 
 function fazerLogin() {
