@@ -27,7 +27,7 @@ Você pode acessar o site diretamente pelo GitHub Pages no link abaixo:
 
 - **HTML5**
 - **CSS3**
-- **JavaScript (Vanilla JS)**
+- **JavaScript**
 - **Git & GitHub**
 - **GitHub Pages**
 
